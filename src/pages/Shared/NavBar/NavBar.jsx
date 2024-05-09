@@ -6,6 +6,7 @@ const NavBar = () => {
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/rooms'}>Rooms</NavLink></li>
         <li><NavLink to={'/booking'}>My Bookings</NavLink></li>
+        <li><NavLink to={'/register'}>Register</NavLink></li>
         <li><NavLink to={'/about'}>About Us</NavLink></li>
         <li><NavLink to={'/contact'}>Contact Us</NavLink></li>
     </>
@@ -33,7 +34,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Login</a>
+                    <NavLink to={'/login'} className='btn'>Login</NavLink>
                 </div>
             </div>
         </div>
