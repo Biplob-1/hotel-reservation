@@ -9,7 +9,7 @@ import app from '../../firebase/firebase.init';
 
 const Register = () => {
     const  {registerUser}  = useContext(AuthContext);
-    console.log(registerUser);
+    // console.log(registerUser);
     const auth = getAuth(app)
     const [formData, setFormData] = useState({
         name: '',
@@ -78,6 +78,14 @@ const Register = () => {
             // Register user if email does not exist
             const user = await registerUser(formData.email, formData.password, formData.name, formData.photoURL);
             toast.success('User registered successfully!');
+
+            setFormData({
+                name: '',
+                email: '',
+                photoURL: '',
+                password: '',
+                showPassword: false
+            });
             
         } catch (error) {
             console.error(error.message)

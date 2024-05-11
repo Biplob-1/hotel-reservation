@@ -1,12 +1,37 @@
+import { useContext } from "react";
 import { FiAlignCenter } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 const NavBar = () => {
+    const {user, logout, loading} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    // logout & redirect login page
+    const handleLogout = () => {
+        logout()
+        .then(() => {
+            // setUser(null);
+            navigate('/login');
+        })
+        .catch((error) => {
+            console.error('Error signing out:', error);
+        })
+        // .finally(() => loading(false));
+    }
     const navLinks = <>
-        <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/rooms'}>Rooms</NavLink></li>
-        <li><NavLink to={'/booking'}>My Bookings</NavLink></li>
-        <li><NavLink to={'/register'}>Register</NavLink></li>
+    <li><NavLink to={'/'}>Home</NavLink></li>
+    <li><NavLink to={'/rooms'}>Rooms</NavLink></li>
+    {user ? (
+        <>
+            <li><NavLink to={'/booking'}>My Bookings</NavLink></li>
+        </>
+    ):(
+        <>
+            <li><NavLink to={'/register'}>Register</NavLink></li>
+        </>
+    )
+    }
         <li><NavLink to={'/about'}>About Us</NavLink></li>
         <li><NavLink to={'/contact'}>Contact Us</NavLink></li>
     </>
@@ -34,7 +59,11 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <NavLink to={'/login'} className='btn'>Login</NavLink>
+                    {user ? (
+                        <button type="button" onClick={handleLogout} className='btn'>Logout</button>
+                        ) : (
+                        <NavLink to={'/login'} className='btn'>Login</NavLink>
+                    )}
                 </div>
             </div>
         </div>
