@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Room = () => {
-    const [availableRoom, setAvailableRoom] = useState([]);
+    const [rooms, setRooms] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/availabileRooms')
+        fetch('http://localhost:5000/allRooms')
         .then(res => res.json())
-        .then(data => setAvailableRoom(data))
+        .then(data => setRooms(data))
     },[]);
     // console.log(availableRoom)
     return(
@@ -20,8 +20,9 @@ const Room = () => {
             </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {availableRoom.map(room => (
-                <div key={room.id} className="border rounded-md overflow-hidden shadow-lg"> 
+        {rooms.map(room => (
+                <div key={room._id} className="border rounded-md overflow-hidden shadow-lg"> 
+                <Link to={`/roomDetails/${room._id}`}>
                         <img src={room.image}  className="w-full h-64 object-cover" />
                         <div className="p-4">
                             <h2 className="text-xl font-semibold mb-2">{room.room_description}</h2>
@@ -29,6 +30,8 @@ const Room = () => {
                             <p className="mt-2 text-gray-600">Price: {room.price_per_night}</p>
                             <p className="mt-2 text-gray-600">Total Reviews: {room.rating}</p>
                         </div>
+                </Link>
+                        
                 </div>
             ))}
         </div>
