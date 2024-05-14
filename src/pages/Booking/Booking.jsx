@@ -6,8 +6,9 @@ const Booking = () => {
     const room = useLoaderData();
     const {_id } = room;
     const {user} = useContext(AuthContext)
-    // console.log(user);
-    // console.log(room);
+
+    const [formData, setFormData] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
 
     // Function to handle form submission
@@ -30,23 +31,35 @@ const Booking = () => {
             date,
             bookId: _id,
         }
-        console.log(roomBooking); 
-        fetch('http://localhost:5000/roomBookings', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(roomBooking)
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-        })
+        setFormData(roomBooking)
+        setShowModal(true);
+    };
+
+    const handleConfirm = () => {
+        if (formData) {
+            fetch('http://localhost:5000/roomBookings', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                setShowModal(false); 
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
     };
 
     return (
-        <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+        
+        <div>
             <h3 className="text-xl font-semibold">Room Booking</h3>
+            <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
             <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
                 <div className="flex flex-col">
                     <label htmlFor="username" className="text-sm font-semibold">Username:</label>
@@ -106,6 +119,24 @@ const Booking = () => {
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
+        </div>
+        {showModal && (
+                <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-8 rounded-md shadow-md">
+                        {/* Modal content (room summary) */}
+                        <h3 className="text-xl font-semibold mb-4">Room Summary</h3>
+                        <p>Username: {formData.customerName}</p>
+                        <p>Email: {formData.email}</p>
+                        <p>Room Name: {formData.roomName}</p>
+                        <p>Price Per Night: {formData.pricePerNight}</p>
+                        <p>Date: {formData.date}</p>
+                        <div className="flex justify-between mt-4">
+                            <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>
+                            <button className="btn btn-primary" onClick={handleConfirm}>Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
