@@ -2,7 +2,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const RoomDetails = () => {
     const room = useLoaderData();
-    console.log(room);
+    // console.log(room);
 
     const isAvailable = room.availability;
 
