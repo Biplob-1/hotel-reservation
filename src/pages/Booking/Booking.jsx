@@ -24,7 +24,6 @@ const Booking = () => {
         return `${year}-${month}-${day}`;
     };
 
-    // Function to handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -49,10 +48,10 @@ const Booking = () => {
         setShowModal(true);
     };
 
-    // Function to handle confirmation button click
+    //  handle confirmation 
     const handleConfirm = () => {
         if (formData) {
-            fetch('http://localhost:5000/roomBookings', {
+            fetch('https://hotel-booking-server-eight.vercel.app/roomBookings', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -128,7 +127,7 @@ const Booking = () => {
                             type="date"
                             id="date"
                             name='date'
-                            min={getCurrentDate()} // Set min attribute to current date
+                            min={getCurrentDate()} 
                             required
                             className="mt-1 p-2 border rounded-md"
                         />

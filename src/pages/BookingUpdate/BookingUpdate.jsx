@@ -20,7 +20,7 @@ const BookingUpdate = ({ booking, onClose }) => {
     useEffect(() => {
         const fetchRoomData = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/bookedRooms/${booking._id}`);
+                const response = await axios.get(`https://hotel-booking-server-eight.vercel.app/bookedRooms/${booking._id}`);
                 setRoomData(response.data);
             } catch (error) {
                 console.error(error);
@@ -36,7 +36,7 @@ const BookingUpdate = ({ booking, onClose }) => {
 
     const handleConfirm = async () => {
         try {
-            await axios.put(`http://localhost:5000/updateBookedRoom/${booking._id}`, {
+            await axios.put(`https://hotel-booking-server-eight.vercel.app/updateBookedRoom/${booking._id}`, {
                 date: newDate 
             });
             onClose();

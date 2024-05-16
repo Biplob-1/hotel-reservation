@@ -2,15 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import axios from "axios";
 import BookingUpdate from "../BookingUpdate/BookingUpdate";
+import DeleteBookedRoom from "../DeleteBookedRoom/DeleteBookedRoom";
 
 const RoomBooking = () => {
     const { user } = useContext(AuthContext);
     const [bookedRooms, setBookedRooms] = useState([]);
     const [showModal, setShowModal] = useState(false); 
     const [selectedBooking, setSelectedBooking] = useState(null); 
+    const [modalType, setModalType] = useState(null);
     const fetchBookedRooms = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/bookedRooms')
+            const response = await axios.get('https://hotel-booking-server-eight.vercel.app/bookedRooms')
             setBookedRooms(response.data.filter(item => item.email === user.email))
         } catch (error) {
             console.error(error)
@@ -23,8 +25,33 @@ const RoomBooking = () => {
 
     const handleUpdateClick = (booking) => {
         setSelectedBooking(booking);
+        setModalType('update');
         setShowModal(true);
     }
+    const handleDeleteBooking = (booking) => {
+        setSelectedBooking(booking);
+        setModalType('delete');
+        setShowModal(true);
+    }
+
+    const renderModal = () => {
+        if (modalType === 'update') {
+            return (
+                <BookingUpdate
+                    booking={selectedBooking}
+                    onClose={() => setShowModal(false)}
+                />
+            );
+        } else if (modalType === 'delete') {
+            return (
+                <DeleteBookedRoom
+                    booking={selectedBooking}
+                    onClose={() => setShowModal(false)}
+                />
+            );
+        }
+        return null; 
+    };
 
     return (
         <div>
@@ -48,7 +75,7 @@ const RoomBooking = () => {
                                 <td className="border px-4 py-2">{bookedRoom.roomName}</td>
                                 <td className="border px-4 py-2">{bookedRoom.pricePerNight}</td>
                                 <td className="border px-4 py-2">
-                                    <button className="btn btn-primary mr-2" onClick={() => handleCancel(bookedRoom)}>Cancel</button>
+                                    <button className="btn btn-primary mr-2" onClick={() => handleDeleteBooking(bookedRoom)}>Cancel</button>
                                     <button className="btn btn-primary" onClick={() => handleUpdateClick(bookedRoom)}>Update</button>
                                 </td>
                             </tr>
@@ -56,13 +83,7 @@ const RoomBooking = () => {
                     </tbody>
                 </table>
             </div>
-            {/* modal  */}
-            {showModal && (
-                <BookingUpdate
-                    booking={selectedBooking}
-                    onClose={() => setShowModal(false)}
-                />
-            )}
+            {showModal && renderModal()}
         </div>
     );
 }

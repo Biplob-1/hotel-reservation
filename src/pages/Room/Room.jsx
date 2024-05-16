@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Room = () => {
     const [rooms, setRooms] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/allRooms')
+        fetch('https://hotel-booking-server-eight.vercel.app/allRooms')
         .then(res => res.json())
         .then(data => setRooms(data))
     },[]);
