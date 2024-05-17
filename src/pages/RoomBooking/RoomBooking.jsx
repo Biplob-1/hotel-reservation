@@ -3,6 +3,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import axios from "axios";
 import BookingUpdate from "../BookingUpdate/BookingUpdate";
 import DeleteBookedRoom from "../DeleteBookedRoom/DeleteBookedRoom";
+import PostReview from "../PostReview/PostReview";
 
 const RoomBooking = () => {
     const { user } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const RoomBooking = () => {
     const [modalType, setModalType] = useState(null);
     const fetchBookedRooms = async () => {
         try {
-            const response = await axios.get('https://hotel-booking-server-eight.vercel.app/bookedRooms')
+            const response = await axios.get('http://localhost:5000/bookedRooms')
             setBookedRooms(response.data.filter(item => item.email === user.email))
         } catch (error) {
             console.error(error)
@@ -34,6 +35,12 @@ const RoomBooking = () => {
         setShowModal(true);
     }
 
+    const handleReview = (booking) => {
+        setSelectedBooking(booking);
+        setModalType('review');
+        setShowModal(true);
+    }
+
     const renderModal = () => {
         if (modalType === 'update') {
             return (
@@ -49,6 +56,13 @@ const RoomBooking = () => {
                     onClose={() => setShowModal(false)}
                 />
             );
+        }else if (modalType === 'review'){
+            return(
+                <PostReview
+                booking={selectedBooking}
+                onClose={() =>setShowModal(false)}
+                ></PostReview>
+            )
         }
         return null; 
     };
@@ -60,9 +74,9 @@ const RoomBooking = () => {
                 <table className="table-auto w-full">
                     <thead>
                         <tr>
-                            <th className="px-4 py-2">Invoice Date</th>
+                            <th className="px-4 py-2">Booking Time</th>
                             <th className="px-4 py-2">Booking Date</th>
-                            <th className="px-4 py-2">Room ID</th>
+                            <th className="px-4 py-2">Room Name</th>
                             <th className="px-4 py-2">Price</th>
                             <th className="px-4 py-2">Actions</th>
                         </tr>
@@ -70,13 +84,14 @@ const RoomBooking = () => {
                     <tbody>
                         {bookedRooms.map((bookedRoom, index) => (
                             <tr key={index}>
-                                <td className="border px-4 py-2">{bookedRoom.customerName}</td>
+                                <td className="border px-4 py-2">{bookedRoom.bookingTime}</td>
                                 <td className="border px-4 py-2">{bookedRoom.date}</td>
                                 <td className="border px-4 py-2">{bookedRoom.roomName}</td>
-                                <td className="border px-4 py-2">{bookedRoom.pricePerNight}</td>
+                                <td className="border px-4 py-2">${bookedRoom.pricePerNight}</td>
                                 <td className="border px-4 py-2">
                                     <button className="btn btn-primary mr-2" onClick={() => handleDeleteBooking(bookedRoom)}>Cancel</button>
-                                    <button className="btn btn-primary" onClick={() => handleUpdateClick(bookedRoom)}>Update</button>
+                                    <button className="btn btn-primary mr-2" onClick={() => handleUpdateClick(bookedRoom)}>Update</button>
+                                    <button className="btn btn-primary" onClick={() => handleReview(bookedRoom)}>Review</button>
                                 </td>
                             </tr>
                         ))}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Room = () => {
     const [rooms, setRooms] = useState([]);
     useEffect(() => {
-        fetch('https://hotel-booking-server-eight.vercel.app/allRooms')
+        fetch('http://localhost:5000/allRooms')
         .then(res => res.json())
         .then(data => setRooms(data))
     },[]);
@@ -25,10 +25,13 @@ const Room = () => {
                 <Link to={`/roomDetails/${room._id}`}>
                         <img src={room.image}  className="w-full h-64 object-cover" />
                         <div className="p-4">
-                            <h2 className="text-xl font-semibold mb-2">{room.room_description}</h2>
-                            <p className="text-gray-700">{room.room_description}</p>
-                            <p className="mt-2 text-gray-600">Price: {room.price_per_night}</p>
-                            <p className="mt-2 text-gray-600">Total Reviews: {room.rating}</p>
+                            <h2 className="text-xl font-bold mb-2">{room.roomName}</h2>
+                            <div className="flex justify-between">
+                                <p className="mt-2 text-gray-600">Price: ${room.price_per_night}</p>
+                                <p className="mt-2 text-gray-600">Total Reviews: {room.totalRating}</p>
+                            </div>
+                            <button type="button" className="btn btn-primary w-full">Cheackout</button>
+                            
                         </div>
                 </Link>
                         

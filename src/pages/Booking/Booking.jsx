@@ -42,6 +42,8 @@ const Booking = () => {
             pricePerNight,
             date,
             bookId: _id,
+            // Current date and time
+            bookingTime: new Date().toLocaleString()
         };
 
         setFormData(roomBooking);
@@ -51,7 +53,7 @@ const Booking = () => {
     //  handle confirmation 
     const handleConfirm = () => {
         if (formData) {
-            fetch('https://hotel-booking-server-eight.vercel.app/roomBookings', {
+            fetch('http://localhost:5000/roomBookings', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -60,15 +62,31 @@ const Booking = () => {
             })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
-                setShowModal(false); 
-                navigate('/booking')
+                if (data.insertedId) {
+                    // After successful booking, update the room's availability
+                    fetch(`http://localhost:5000/updateRoomAvailability/${formData.bookId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({ availability: false })
+                    })
+                    .then(res => res.json())
+                    .then(() => {
+                        setShowModal(false);
+                        navigate('/booking');
+                    })
+                    .catch(error => {
+                        console.error('Error updating room availability:', error);
+                    });
+                }
             })
             .catch(error => {
                 console.error('Error:', error);
             });
         }
     };
+    
 
     return (
         <div>
@@ -105,13 +123,13 @@ const Booking = () => {
                             type="text"
                             id="roomName"
                             name='roomName'
-                            defaultValue={room.room_description} 
+                            defaultValue={room.roomName} 
                             readOnly
                             className="mt-1 p-2 border rounded-md bg-gray-100"
                         />
                     </div>
                     <div className="flex flex-col">
-                        <label htmlFor="price" className="text-sm font-semibold">Price:</label>
+                        <label htmlFor="price" className="text-sm font-semibold">Price($):</label>
                         <input
                             type="text"
                             id="price"
@@ -143,7 +161,7 @@ const Booking = () => {
                         <p>Username: {formData.customerName}</p>
                         <p>Email: {formData.email}</p>
                         <p>Room Name: {formData.roomName}</p>
-                        <p>Price Per Night: {formData.pricePerNight}</p>
+                        <p>Price Per Night($): {formData.pricePerNight}</p>
                         <p>Date: {formData.date}</p>
                         <div className="flex justify-between mt-4">
                             <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Cancel</button>

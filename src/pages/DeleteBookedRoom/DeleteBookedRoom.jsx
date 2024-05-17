@@ -4,8 +4,15 @@ import { useState } from "react";
 const DeleteBookedRoom = ({ booking, onClose }) => {
     const handleConfirm = async () => {
         try {
-            await axios.delete(`https://hotel-booking-server-eight.vercel.app/deleteBookedRoom/${booking._id}`);
-            // onClose();
+            // Delete the booking
+            await axios.delete(`http://localhost:5000/deleteBookedRoom/${booking._id}`);
+            
+            // Update room availability
+            await axios.put(`http://localhost:5000/updateRoomAvailability/${booking.bookId}`, {
+                availability: true
+            });
+
+            onClose();
         } catch (error) {
             console.error('Error deleting Booking:', error);
         }

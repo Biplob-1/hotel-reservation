@@ -51,22 +51,22 @@ const router = createBrowserRouter([
         {
           path: '/roomDetails/:id',
           element:<PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>,
-          loader: ({params}) => fetch(`https://hotel-booking-server-eight.vercel.app/allRooms/${params.id}`),
+          loader: ({params}) => fetch(`http://localhost:5000/allRooms/${params.id}`),
         },
         {
           path:'/bookRoom/:id',
           element: <PrivateRoute><Booking></Booking></PrivateRoute>,
-          loader: ({params}) => fetch(`https://hotel-booking-server-eight.vercel.app/allRooms/${params.id}`),
+          loader: ({params}) => fetch(`http://localhost:5000/allRooms/${params.id}`),
         },
         {
           path:'/updateBookedRoom/:id',
           element: <PrivateRoute><BookingUpdate></BookingUpdate></PrivateRoute>,
-          loader: ({params}) => fetch(`https://hotel-booking-server-eight.vercel.app/updateBookedRoom/${params.id}`)
+          loader: ({params}) => fetch(`http://localhost:5000/updateBookedRoom/${params.id}`)
         },
         {
           path:'/deleteBookedRoom/:id',
           element: <PrivateRoute><DeleteBookedRoom></DeleteBookedRoom></PrivateRoute>,
-          loader: ({params}) => fetch(`https://hotel-booking-server-eight.vercel.app/deleteBookedRoom/${params.id}`)
+          loader: ({params}) => fetch(`http://localhost:5000/deleteBookedRoom/${params.id}`)
         }
       ]
     },
