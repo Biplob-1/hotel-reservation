@@ -36,7 +36,7 @@ const RoomDetails = () => {
                         <p className={`mt-2 text-gray-600`}>Availability: <span className={`${isAvailable ? 'text-green-600' : 'text-red-600'}`}>{isAvailable ? 'Available' : 'Not Available'}</span></p>
                         <p className="mt-2 text-gray-600">Special Offers: {room.special_offers}</p>
                         <p className="mt-2 text-gray-600"> Rating: {room.averageRating}</p>
-                        <p className="mt-2 text-gray-600"> All Reviews: {room.totalRating}</p>
+                        <p className="mt-2 text-gray-600"> All Reviews: {room.numberOfReviews}</p>
                     </div>
                     
                     

@@ -28,7 +28,7 @@ const Room = () => {
                             <h2 className="text-xl font-bold mb-2">{room.roomName}</h2>
                             <div className="flex justify-between">
                                 <p className="mt-2 text-gray-600">Price: ${room.price_per_night}</p>
-                                <p className="mt-2 text-gray-600">Total Reviews: {room.totalRating}</p>
+                                <p className="mt-2 text-gray-600">Total Reviews: {room.numberOfReviews}</p>
                             </div>
                             <button type="button" className="btn btn-primary w-full">Cheackout</button>
                             

@@ -4,7 +4,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 const PostReview = ({ booking, onClose }) => {
     const { user } = useContext(AuthContext);
     const [review, setReview] = useState("");
-    const [rating, setRating] = useState(1); // Initialize rating state
+    const [rating, setRating] = useState(1); 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -39,7 +39,15 @@ const PostReview = ({ booking, onClose }) => {
             const result = await response.json();
             console.log('Review posted:', result);
 
-            // Optionally update the state or notify the user
+            // Update room ratings
+            await fetch(`http://localhost:5000/updateRoomRating/${booking.bookId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ rating })
+            });
+
             onClose();
         } catch (error) {
             console.error('Error posting review:', error);

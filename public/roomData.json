@@ -7,8 +7,9 @@
         "room_size": "700 sqft",
         "availability": true,
         "special_offers": "Complimentary breakfast included",
-        "averageRating": 4.5,
-        "totalRating": 0
+        "averageRating": 0,
+        "totalRating": 0,
+        "numberOfReviews" : 0
     },
     {
         "image": "https://i.ibb.co/4ZdQMXC/2.jpg",
@@ -18,8 +19,9 @@
         "room_size": "400 sqft",
         "availability": true,
         "special_offers": "No",
-        "averageRating": 4.0,
-        "totalRating": 0
+        "averageRating": 0,
+        "totalRating": 0,
+        "numberOfReviews" : 0
     },
     {
         "image": "https://i.ibb.co/4ZK2ZpM/3.jpg",
@@ -29,8 +31,9 @@
         "room_size": "600 sqft",
         "availability": true,
         "special_offers": "10% discount for stays longer than 3 nights",
-        "averageRating": 4.8,
-        "totalRating": 0
+        "averageRating": 0,
+        "totalRating": 0,
+        "numberOfReviews" : 0
     },
     {
         "image": "https://i.ibb.co/3BnXn16/4.jpg",
@@ -40,8 +43,9 @@
         "room_size": "900 sqft",
         "availability": true,
         "special_offers": "No",
-        "averageRating": 4.6,
-        "totalRating": 0
+        "averageRating": 0,
+        "totalRating": 0,
+        "numberOfReviews" : 0
     },
     {
         "image": "https://i.ibb.co/y84qpcd/5.jpg",
@@ -51,8 +55,9 @@
         "room_size": "300 sqft",
         "availability": true,
         "special_offers": "Free airport shuttle service",
-        "averageRating": 4.2,
-        "totalRating": 0
+        "averageRating": 0,
+        "totalRating": 0,
+        "numberOfReviews" : 0
     },
     {
         "image": "https://i.ibb.co/CVTTTrn/6.jpg",
@@ -62,8 +67,9 @@
         "room_size": "1200 sqft",
         "availability": true,
         "special_offers": "No",
-        "averageRating": 4.9,
-        "totalRating": 0
+        "averageRating": 0,
+        "totalRating": 0,
+        "numberOfReviews" : 0
     },
     {
         "image": "https://i.ibb.co/fSWwtkL/7.jpg",
@@ -73,8 +79,9 @@
         "room_size": "200 sqft",
         "availability": true,
         "special_offers": "50% off on weekdays",
-        "averageRating": 3.9,
-        "totalRating": 0
+        "averageRating": 0,
+        "totalRating": 0,
+        "numberOfReviews" : 0
     },
     {
         "image": "https://i.ibb.co/bvHkL8g/8.jpg",
@@ -84,8 +91,9 @@
         "room_size": "1000 sqft",
         "availability": true,
         "special_offers": "Complimentary bottle of champagne",
-        "averageRating": 4.7,
-        "totalRating": 0
+        "averageRating": 0,
+        "totalRating": 0,
+        "numberOfReviews" : 0
     },
     {
         "image": "https://i.ibb.co/tpnPHNS/9.jpg",
@@ -95,7 +103,8 @@
         "room_size": "350 sqft",
         "availability": true,
         "special_offers": "No",
-        "averageRating": 4.1,
-        "totalRating": 0
+        "averageRating": 0,
+        "totalRating": 0,
+        "numberOfReviews" : 0
     }
 ]
