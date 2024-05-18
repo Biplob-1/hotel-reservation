@@ -14,13 +14,15 @@ const PostReview = ({ booking, onClose }) => {
 
         const reviewData = {
             roomName: booking.roomName,
+            userPhoto: user.photoURL,
             userEmail: user.email,
             rating: rating,
             review: review,
+            reviewDateTime: new Date("2024-05-17T02:50:01").toISOString(),
             // Current date in YYYY-MM-DD format
-            reviewDate: new Date().toISOString().split('T')[0], 
+            //reviewDate: new Date().toISOString().split('T')[0], 
             // Current time in HH:MM:SS format
-            reviewTime: new Date().toLocaleTimeString() 
+            //reviewTime: new Date().toLocaleTimeString() 
         };
 
         try {
