@@ -8,7 +8,7 @@ const FeturedRooms = () => {
 
     useEffect(() =>{
         setLoading (true)
-        fetch('http://localhost:5000/availabileRooms')
+        fetch('https://hotel-booking-server-eight.vercel.app/availabileRooms')
         .then(res => res.json())
         .then(data => {
             setAvailableRooms(data);

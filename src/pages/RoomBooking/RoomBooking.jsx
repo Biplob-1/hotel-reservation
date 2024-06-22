@@ -13,7 +13,7 @@ const RoomBooking = () => {
     const [modalType, setModalType] = useState(null);
     const fetchBookedRooms = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/bookedRooms')
+            const response = await axios.get('https://hotel-booking-server-eight.vercel.app/bookedRooms')
             setBookedRooms(response.data.filter(item => item.email === user.email))
         } catch (error) {
             console.error(error)

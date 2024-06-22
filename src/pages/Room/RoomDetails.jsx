@@ -11,7 +11,7 @@ const RoomDetails = () => {
 
     const fetchReviews = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/allReviews')
+            const response = await axios.get('https://hotel-booking-server-eight.vercel.app/allReviews')
             setReviews(response.data.filter(item => item.roomName === room.roomName));
         } catch (error) {
             console.error(error)

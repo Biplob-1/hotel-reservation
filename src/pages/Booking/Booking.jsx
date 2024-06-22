@@ -53,7 +53,7 @@ const Booking = () => {
     //  handle confirmation 
     const handleConfirm = () => {
         if (formData) {
-            fetch('http://localhost:5000/roomBookings', {
+            fetch('https://hotel-booking-server-eight.vercel.app/roomBookings', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -64,7 +64,7 @@ const Booking = () => {
             .then(data => {
                 if (data.insertedId) {
                     // After successful booking, update the room's availability
-                    fetch(`http://localhost:5000/updateRoomAvailability/${formData.bookId}`, {
+                    fetch(`https://hotel-booking-server-eight.vercel.app/updateRoomAvailability/${formData.bookId}`, {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json'

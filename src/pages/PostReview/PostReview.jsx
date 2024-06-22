@@ -34,7 +34,7 @@ const PostReview = ({ booking, onClose }) => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/allReviews', {
+            const response = await fetch('https://hotel-booking-server-eight.vercel.app/allReviews', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ const PostReview = ({ booking, onClose }) => {
             console.log('Review posted:', result);
 
             // Update room ratings
-            await fetch(`http://localhost:5000/updateRoomRating/${booking.bookId}`, {
+            await fetch(`https://hotel-booking-server-eight.vercel.app/updateRoomRating/${booking.bookId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
