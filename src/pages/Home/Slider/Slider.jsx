@@ -9,7 +9,7 @@ const Slider = () => {
     <div>
             <div className="mt-2 lg:mt-5 mb-5">
             <Swiper
-
+                style={{zIndex: 0}}
                 navigation={true}
                 modules={[Navigation, Autoplay, Pagination]}
                 loop={true}

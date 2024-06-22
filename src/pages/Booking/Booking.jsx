@@ -90,9 +90,9 @@ const Booking = () => {
 
     return (
         <div>
-            <h3 className="text-xl font-semibold">Room Booking</h3>
-            <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
-                <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+            <h3 className="text-3xl font-semibold text-center my-5">Room Booking</h3>
+            <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4 my-5">
+                <form onSubmit={handleSubmit} className="flex flex-col space-y-4 mx-auto">
                     <div className="flex flex-col">
                         <label htmlFor="username" className="text-sm font-semibold">Username:</label>
                         <input

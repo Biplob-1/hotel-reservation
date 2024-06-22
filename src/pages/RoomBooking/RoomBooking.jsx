@@ -69,7 +69,7 @@ const RoomBooking = () => {
 
     return (
         <div>
-            <h3>My Booked Rooms</h3>
+            <h3 className="text-3xl font-bold text-center my-5">My Booked Rooms</h3>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full">
                     <thead>

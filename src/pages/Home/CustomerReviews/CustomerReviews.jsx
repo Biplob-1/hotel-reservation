@@ -40,8 +40,8 @@ const CustomerReviews = () => {
                     <Slider {...settings}>
                     {reviews.map(review =>(
                         <div className="bg-white h-[450px] text-black rounded-xl">
-                            <div className="h-56 rounded-t-xl bg-indigo-500 flex justify-center items-center">
-                                <img src={review.userPhoto} alt={review.userEmail} className="h-44 w-44 rounded-full"/>
+                            <div className="max-h-52 rounded-t-xl bg-indigo-500 flex justify-center items-center">
+                                <img src={review.userPhoto} alt={review.userEmail} className="h-40 w-40 rounded-full"/>
                             </div>
                             <div className="flex flex-col justify-center items-center gap-4 p-4">
                                 <p className="text-xl font-semibold">{review.userEmail}</p>

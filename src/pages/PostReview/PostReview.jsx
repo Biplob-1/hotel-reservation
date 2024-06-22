@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
+import moment from 'moment-timezone';
 
 const PostReview = ({ booking, onClose }) => {
     const { user } = useContext(AuthContext);
@@ -8,21 +9,28 @@ const PostReview = ({ booking, onClose }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    
+
     const handleConfirm = async (e) => {
         e.preventDefault();
         setLoading(true);
+        const utcDateTime = moment.utc();
+        const localDateTime = utcDateTime.tz('Asia/Dhaka');
+        const localISOString = localDateTime.toISOString();
 
+        const currentDate = new Date();
+        const updateCurrentToLocalDate = currentDate.toLocaleString();
+        console.log(updateCurrentToLocalDate);
+        
         const reviewData = {
             roomName: booking.roomName,
             userPhoto: user.photoURL,
             userEmail: user.email,
             rating: rating,
             review: review,
-            reviewDateTime: new Date("2024-05-17T02:50:01").toISOString(),
-            // Current date in YYYY-MM-DD format
-            //reviewDate: new Date().toISOString().split('T')[0], 
-            // Current time in HH:MM:SS format
-            //reviewTime: new Date().toLocaleTimeString() 
+            // reviewDateTime: moment.tz('Asia/Dhaka').toISOString(),
+            // reviewDateTime: currentDate,
+            timestams: true
         };
 
         try {
